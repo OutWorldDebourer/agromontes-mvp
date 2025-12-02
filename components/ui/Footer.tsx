@@ -78,7 +78,7 @@ export default function Footer() {
                         <ul className="space-y-3 text-gray-400">
                             <li>info@agromontes.com</li>
                             <li>+51 952 348 485</li>
-                            <li>Lima, Perú</li>
+                            <li>Huaral, Lima, Perú</li>
                         </ul>
                         <div className="flex gap-4 mt-6">
                             <a href="https://www.facebook.com/profile.php?id=100066852608519&locale=es_LA" target="_blank" rel="noopener noreferrer" className="p-2 bg-white/5 rounded-full hover:bg-green-600 transition-colors" aria-label="Facebook">
@@ -100,7 +100,7 @@ export default function Footer() {
                 </div>
 
                 <div className="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
-                    <p>&copy; 2024 AgroMontes. Todos los derechos reservados.</p>
+                    <p>&copy; 2025 AVI PF A. Todos los derechos reservados.</p>
                 </div>
             </div>
         </footer>
