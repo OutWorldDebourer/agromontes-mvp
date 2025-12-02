@@ -77,7 +77,7 @@ export default function Footer() {
                         <h4 className="font-bold text-lg mb-6">Contacto</h4>
                         <ul className="space-y-3 text-gray-400">
                             <li>info@agromontes.com</li>
-                            <li>+51 999 999 999</li>
+                            <li>+51 952 348 485</li>
                             <li>Lima, Perú</li>
                         </ul>
                         <div className="flex gap-4 mt-6">
