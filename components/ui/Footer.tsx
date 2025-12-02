@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Facebook, Instagram, MessageCircle } from "lucide-react";
+import { Facebook, Instagram } from "lucide-react";
 
 export default function Footer() {
     return (
@@ -85,15 +85,38 @@ export default function Footer() {
                                 <Facebook className="w-5 h-5" />
                             </a>
                             <a href="https://www.tiktok.com/@agromontesad" target="_blank" rel="noopener noreferrer" className="p-2 bg-white/5 rounded-full hover:bg-green-600 transition-colors" aria-label="TikTok">
-                                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 1 0 1 5.45v-7h2.9a1.29 1.29 0 0 0 1.29-1.29V6.69z" />
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="20"
+                                    height="20"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                >
+                                    <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
                                 </svg>
                             </a>
                             <a href="https://www.instagram.com/agromontes.peru/" target="_blank" rel="noopener noreferrer" className="p-2 bg-white/5 rounded-full hover:bg-green-600 transition-colors" aria-label="Instagram">
                                 <Instagram className="w-5 h-5" />
                             </a>
-                            <a href="https://bit.ly/InfoAgroMontes" target="_blank" rel="noopener noreferrer" className="p-2 bg-white/5 rounded-full hover:bg-green-600 transition-colors" aria-label="WhatsApp">
-                                <MessageCircle className="w-5 h-5" />
+                            <a href="https://wa.me/51952348485?text=Hola,%20vi%20tu%20perfil%20y%20me%20interesa%20conocer%20más%20sobre%20Agro%20Montes" target="_blank" rel="noopener noreferrer" className="p-2 bg-white/5 rounded-full hover:bg-green-600 transition-colors" aria-label="WhatsApp">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="20"
+                                    height="20"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                >
+                                    <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" />
+                                    <path d="M9 10a.5.5 0 0 0 1 1h4a.5.5 0 0 0 1-1V9a.5.5 0 0 0-.5-.5h-5A.5.5 0 0 0 9 9v1Z" />
+                                </svg>
                             </a>
                         </div>
                     </div>

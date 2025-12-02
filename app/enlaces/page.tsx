@@ -57,14 +57,14 @@ const LINKS = [
     },
     {
         name: "Página Web",
-        url: "/",
+        url: "https://outworlddebourer.github.io/agromontes-mvp/",
         icon: Globe,
         color: "bg-green-600",
         textColor: "text-white"
     },
     {
         name: "WhatsApp",
-        url: "https://wa.me/51921450162?text=Hola,%20vi%20tu%20perfil%20y%20me%20interesa%20conocer%20más%20sobre%20Agro%20Montes",
+        url: "https://wa.me/51952348485?text=Hola,%20vi%20tu%20perfil%20y%20me%20interesa%20conocer%20más%20sobre%20Agro%20Montes",
         icon: MessageCircle,
         color: "bg-[#25D366]",
         textColor: "text-white"
