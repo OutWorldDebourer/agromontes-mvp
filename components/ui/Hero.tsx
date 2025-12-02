@@ -25,7 +25,7 @@ export default function Hero() {
             >
                 <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-transparent z-10" />
                 {/* Placeholder for "Campo de Cultivo" - using a rich gradient for now */}
-                <div className="absolute inset-0 bg-[url('/hero-new.png')] bg-cover bg-center" />
+                <div className="absolute inset-0 bg-[url('/agromontes-mvp/hero-new.png')] bg-cover bg-center" />
                 <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white dark:from-gray-900 to-transparent z-20" />
             </motion.div>
 
