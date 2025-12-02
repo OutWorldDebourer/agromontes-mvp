@@ -25,7 +25,8 @@ export default function Hero() {
             >
                 <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-transparent z-10" />
                 {/* Placeholder for "Campo de Cultivo" - using a rich gradient for now */}
-                <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1625246333195-58197bd47d19?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center" />
+                <div className="absolute inset-0 bg-[url('/hero-new.png')] bg-cover bg-center" />
+                <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white dark:from-gray-900 to-transparent z-20" />
             </motion.div>
 
             {/* Content */}
@@ -73,12 +74,12 @@ export default function Hero() {
                     transition={{ duration: 0.8, delay: 1.5 }}
                     className="flex flex-col sm:flex-row gap-4 justify-center pt-8"
                 >
-                    <button className="px-8 py-4 bg-green-600 hover:bg-green-700 text-white rounded-full font-bold text-lg transition-all hover:scale-105 shadow-lg shadow-green-600/30">
+                    <a href="#catalog" className="px-8 py-4 bg-green-600 hover:bg-green-700 text-white rounded-full font-bold text-lg transition-all hover:scale-105 shadow-lg shadow-green-600/30">
                         Ver Catálogo
-                    </button>
-                    <button className="px-8 py-4 bg-white/10 hover:bg-white/20 text-white border border-white/30 rounded-full font-bold text-lg transition-all hover:scale-105 backdrop-blur-sm">
+                    </a>
+                    <a href="#footer" className="px-8 py-4 bg-white/10 hover:bg-white/20 text-white border border-white/30 rounded-full font-bold text-lg transition-all hover:scale-105 backdrop-blur-sm">
                         Contáctanos
-                    </button>
+                    </a>
                 </motion.div>
             </div>
 
