@@ -14,7 +14,7 @@ export default function Hero() {
     const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
     const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
-    const titleWords = "Soluciones Innovadoras".split(" ");
+    const titleWords = "Kelly Lulu mi Amor".split(" ");
 
     return (
         <section ref={ref} className="relative h-screen flex items-center justify-center overflow-hidden">
