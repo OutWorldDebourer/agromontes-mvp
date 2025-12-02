@@ -66,7 +66,7 @@ export default function About() {
                     >
                         <div className="relative aspect-[9/16] w-full max-w-sm rounded-3xl overflow-hidden shadow-2xl border-4 border-white dark:border-gray-800">
                             <video
-                                src="/about-video.mp4"
+                                src="/Agromonte_video.mp4"
                                 className="w-full h-full object-cover"
                                 loop
                                 playsInline
