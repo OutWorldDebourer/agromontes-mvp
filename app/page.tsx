@@ -4,6 +4,7 @@ import Catalog from "@/components/sections/Catalog";
 import Benefits from "@/components/sections/Benefits";
 import About from "@/components/sections/About";
 import Footer from "@/components/ui/Footer";
+import { Suspense } from "react";
 
 export default function Home() {
   return (
@@ -15,7 +16,9 @@ export default function Home() {
       <div id="benefits">
         <Benefits />
       </div>
-      <Catalog />
+      <Suspense fallback={<div>Cargando catálogo...</div>}>
+        <Catalog />
+      </Suspense>
       <About />
       <div id="footer">
         <Footer />
