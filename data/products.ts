@@ -8,6 +8,10 @@ export const PRODUCTS = [
         description: "Fungicida-Acaricida micronizado con acción multisitio y efecto vapor.",
         fullDescription: "Sulfa Max 87 es un fertilizante foliar altamente concentrado en AZUFRE y nitrógeno, destinado a mejorar la nutrición de los cultivos con estos elementos y brindar protección sanitaria contra plagas y enfermedades. Este producto utiliza una fuente de azufre altamente soluble en agua, por tanto, no taponea las boquillas de las pulverizadoras a diferencia de otras fuentes.",
         composition: ["Azufre (S): 87%", "Nitrógeno (N): 15%"],
+        dynamicConcentrations: [
+            { value: 87, label: "Azufre" },
+            { value: 15, label: "Nitrógeno" }
+        ],
         usage: [
             { crop: "Ají, tomate y solanáceas", dose: "1 L – 3 L / Cil", notes: "Aplicar desde crecimiento vegetativo hasta inicio de floración." },
             { crop: "Arándano", dose: "2 L – 3 L / Cil", notes: "1ra aplicación desde brotamiento hasta la cosecha." },
@@ -25,6 +29,10 @@ export const PRODUCTS = [
         description: "Insecticida natural a base de extracto de ajo y oleorresina de ají.",
         fullDescription: "DUO MIX OIL® es un insecticida natural formulado a base de extracto de ajo y oleorresina de ají. La oleorresina de ají actúa causando la muerte de las plagas mediante la alteración de su metabolismo. Por su parte, el extracto de ajo ejerce un efecto tóxico por contacto.",
         composition: ["Aceite de Allium sativum: 40%", "Aceite de Capsicum frutescens: 40%", "Aditivos: 1.5%"],
+        dynamicConcentrations: [
+            { value: 40, label: "Ext. Ajo" },
+            { value: 40, label: "Ext. Ají" }
+        ],
         usage: [
             { crop: "Cítricos", dose: "200–700 mL/200L", notes: "Aplicar al detectar indicios de plaga." },
             { crop: "Frutales", dose: "200–700 mL/200L", notes: "Realizar hasta 2 aplicaciones por campaña." },
@@ -142,6 +150,11 @@ export const PRODUCTS = [
         description: "Fertilizante foliar balanceado para cualquier etapa del cultivo.",
         fullDescription: "EQUILIBRA NPK es un fertilizante foliar de macroelementos primarios N-P-K en suspensión concentrada. Recomendado para complementar la nutrición en cualquier etapa, promoviendo enraizamiento, crecimiento y floración.",
         composition: ["Nitrógeno (N): 20%", "Fósforo (P2O5): 20%", "Potasio (K2O): 20%"],
+        dynamicConcentrations: [
+            { value: 20, label: "Nitrógeno" },
+            { value: 20, label: "Fósforo" },
+            { value: 20, label: "Potasio" }
+        ],
         usage: [
             { crop: "Ají, tomate", dose: "1 L – 2 L / Cil", notes: "7 días post-trasplante, prefloración, desarrollo fruto." }
         ],
@@ -258,6 +271,10 @@ export const PRODUCTS = [
         description: "Fitonutriente con alta riqueza en nitrógeno, aminoácidos y materia orgánica.",
         fullDescription: "AMINOZ V32 es un fitonutriente con alta riqueza en nitrógeno + Aminoácidos. Contiene geles aminos que mejoran la solubilidad y asimilación.",
         composition: ["Aminoácidos totales: 32%", "Aminoácidos Libres: 25%", "Nitrógeno: 12.5%", "Materia orgánica: 40.5%"],
+        dynamicConcentrations: [
+            { value: 32, label: "Aminoácidos" },
+            { value: 12, label: "Nitrógeno" }
+        ],
         usage: [
             { crop: "Papa", dose: "500 ml – 1 lt / Cil", notes: "Inicio estolonamiento, desarrollo tubérculo, 30 días antes cosecha." },
             { crop: "Frutales", dose: "500 ml – 1 lt / Cil", notes: "Inicio desarrollo fruto, repetir a 15 días." }
@@ -354,6 +371,11 @@ export const PRODUCTS = [
         description: "Abono foliar concentrado para etapas iniciales de crecimiento.",
         fullDescription: "BROTE MAX NPK es un Abono Foliar concentrado con nitrógeno asimilable. Estimula división celular y desarrollo de órganos vegetativos. Corrige deficiencias de nitrógeno.",
         composition: ["Nitrógeno (N): 40%", "Fósforo (P2O5): 10%", "Potasio (K2O): 10%"],
+        dynamicConcentrations: [
+            { value: 40, label: "Nitrógeno" },
+            { value: 10, label: "Fósforo" },
+            { value: 10, label: "Potasio" }
+        ],
         usage: [
             { crop: "Ajo, cebolla", dose: "500 ml – 1 lt / Cil", notes: "10 días de siembra, repetir cada 15 días." },
             { crop: "Alcachofa", dose: "500 ml – 1 lt / Cil", notes: "10 días de siembra, repetir cada 15 días." }

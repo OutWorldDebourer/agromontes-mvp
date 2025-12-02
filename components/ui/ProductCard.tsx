@@ -17,6 +17,7 @@ interface ProductCardProps {
     price: number;
     onSelect: () => void;
     usage?: { crop: string; dose: string }[];
+    dynamicConcentrations?: { value: number, label: string }[];
 }
 
 const CategoryColors: Record<string, { bg: string, text: string, border: string, hover: string, icon: any }> = {
@@ -79,11 +80,12 @@ function Counter({ value, duration = 1.5 }: { value: number, duration?: number }
     return <span ref={nodeRef}>{count}</span>;
 }
 
-export default function ProductCard({ id, name, category, concentration, concentrationLabel, description, dose, price, onSelect, usage }: ProductCardProps) {
+export default function ProductCard({ id, name, category, concentration, concentrationLabel, description, dose, price, onSelect, usage, dynamicConcentrations }: ProductCardProps) {
     const theme = CategoryColors[category] || CategoryColors["Nutrientes"];
     const Icon = theme.icon;
     const { addItem } = useCart();
     const [currentDoseIndex, setCurrentDoseIndex] = useState(0);
+    const [currentConcIndex, setCurrentConcIndex] = useState(0);
 
     useEffect(() => {
         if (usage && usage.length > 1) {
@@ -94,12 +96,26 @@ export default function ProductCard({ id, name, category, concentration, concent
         }
     }, [usage]);
 
+    useEffect(() => {
+        if (dynamicConcentrations && dynamicConcentrations.length > 1) {
+            const interval = setInterval(() => {
+                setCurrentConcIndex((prev) => (prev + 1) % dynamicConcentrations.length);
+            }, 3000); // Sync with dose or offset it
+            return () => clearInterval(interval);
+        }
+    }, [dynamicConcentrations]);
+
     const handleAddToCart = (e: React.MouseEvent) => {
         e.stopPropagation();
         addItem({ id, name, price, category });
     };
 
     const currentDose = usage && usage.length > 0 ? usage[currentDoseIndex] : null;
+
+    // Determine current concentration values
+    const activeConcentration = dynamicConcentrations && dynamicConcentrations.length > 0
+        ? dynamicConcentrations[currentConcIndex]
+        : { value: concentration, label: concentrationLabel };
 
     return (
         <motion.div
@@ -120,12 +136,23 @@ export default function ProductCard({ id, name, category, concentration, concent
                 <div className={cn("p-3 rounded-xl transition-colors duration-300", theme.bg)}>
                     <Icon className={cn("w-6 h-6", theme.text)} />
                 </div>
-                <div className="text-right">
-                    <div className="text-3xl font-bold text-gray-900 dark:text-white flex items-baseline justify-end gap-1">
-                        <Counter value={concentration} />
-                        <span className="text-sm font-medium text-gray-400">%</span>
-                    </div>
-                    <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">{concentrationLabel}</p>
+                <div className="text-right h-[52px] flex flex-col justify-center items-end">
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            key={currentConcIndex}
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
+                            transition={{ duration: 0.3 }}
+                            className="flex flex-col items-end"
+                        >
+                            <div className="text-3xl font-bold text-gray-900 dark:text-white flex items-baseline justify-end gap-1">
+                                <Counter value={activeConcentration.value} />
+                                <span className="text-sm font-medium text-gray-400">%</span>
+                            </div>
+                            <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">{activeConcentration.label}</p>
+                        </motion.div>
+                    </AnimatePresence>
                 </div>
             </div>
 
