@@ -18,6 +18,7 @@ interface ProductCardProps {
     onSelect: () => void;
     usage?: { crop: string; dose: string }[];
     dynamicConcentrations?: { value: number, label: string }[];
+    composition?: string[];
 }
 
 const CategoryColors: Record<string, { bg: string, text: string, border: string, hover: string, icon: any }> = {
@@ -80,12 +81,12 @@ function Counter({ value, duration = 1.5 }: { value: number, duration?: number }
     return <span ref={nodeRef}>{count}</span>;
 }
 
-export default function ProductCard({ id, name, category, concentration, concentrationLabel, description, dose, price, onSelect, usage, dynamicConcentrations }: ProductCardProps) {
+export default function ProductCard({ id, name, category, concentration, concentrationLabel, description, dose, price, onSelect, usage, dynamicConcentrations, composition }: ProductCardProps) {
     const theme = CategoryColors[category] || CategoryColors["Nutrientes"];
     const Icon = theme.icon;
     const { addItem } = useCart();
     const [currentDoseIndex, setCurrentDoseIndex] = useState(0);
-    const [currentConcIndex, setCurrentConcIndex] = useState(0);
+    const [currentCompIndex, setCurrentCompIndex] = useState(0);
 
     useEffect(() => {
         if (usage && usage.length > 1) {
@@ -97,13 +98,13 @@ export default function ProductCard({ id, name, category, concentration, concent
     }, [usage]);
 
     useEffect(() => {
-        if (dynamicConcentrations && dynamicConcentrations.length > 1) {
+        if (composition && composition.length > 1) {
             const interval = setInterval(() => {
-                setCurrentConcIndex((prev) => (prev + 1) % dynamicConcentrations.length);
-            }, 3000); // Sync with dose or offset it
+                setCurrentCompIndex((prev) => (prev + 1) % composition.length);
+            }, 3000);
             return () => clearInterval(interval);
         }
-    }, [dynamicConcentrations]);
+    }, [composition]);
 
     const handleAddToCart = (e: React.MouseEvent) => {
         e.stopPropagation();
@@ -112,10 +113,28 @@ export default function ProductCard({ id, name, category, concentration, concent
 
     const currentDose = usage && usage.length > 0 ? usage[currentDoseIndex] : null;
 
-    // Determine current concentration values
-    const activeConcentration = dynamicConcentrations && dynamicConcentrations.length > 0
-        ? dynamicConcentrations[currentConcIndex]
-        : { value: concentration, label: concentrationLabel };
+    // Determine current concentration values based on composition
+    const currentComposition = composition && composition.length > 0 ? composition[currentCompIndex] : null;
+
+    let activeConcentration = {
+        value: concentration,
+        label: concentrationLabel,
+        unit: "%"
+    };
+
+    if (currentComposition) {
+        // Try to parse "Label: Value Unit" or "Label: Value%"
+        // Regex looks for: (Label): (Value)(Unit)
+        // Examples: "Azufre (S): 87%", "Peptidatos: 120 mg/L"
+        const match = currentComposition.match(/(.*?):\s*(\d+(\.\d+)?)\s*(%|[a-zA-Z\/]+)?/);
+        if (match) {
+            activeConcentration = {
+                label: match[1].trim(),
+                value: parseFloat(match[2]),
+                unit: match[4] || ""
+            };
+        }
+    }
 
     return (
         <motion.div
@@ -139,7 +158,7 @@ export default function ProductCard({ id, name, category, concentration, concent
                 <div className="text-right h-[52px] flex flex-col justify-center items-end">
                     <AnimatePresence mode="wait">
                         <motion.div
-                            key={currentConcIndex}
+                            key={currentCompIndex} // Sync animation with composition cycle
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -10 }}
@@ -148,9 +167,11 @@ export default function ProductCard({ id, name, category, concentration, concent
                         >
                             <div className="text-3xl font-bold text-gray-900 dark:text-white flex items-baseline justify-end gap-1">
                                 <Counter value={activeConcentration.value} />
-                                <span className="text-sm font-medium text-gray-400">%</span>
+                                <span className="text-sm font-medium text-gray-400">{activeConcentration.unit}</span>
                             </div>
-                            <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">{activeConcentration.label}</p>
+                            <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider max-w-[150px] truncate">
+                                {activeConcentration.label}
+                            </p>
                         </motion.div>
                     </AnimatePresence>
                 </div>
@@ -165,6 +186,49 @@ export default function ProductCard({ id, name, category, concentration, concent
                     <p className="text-sm text-gray-500 dark:text-gray-400 line-clamp-2">
                         {description}
                     </p>
+                </div>
+
+                {/* Composition Visualization */}
+                <div className="space-y-2">
+                    <div className="flex justify-between text-xs font-medium text-gray-400 h-5">
+                        <span>Composición Garantizada</span>
+                        <AnimatePresence mode="wait">
+                            {/* Check if composition exists and has items */}
+                            {composition && composition.length > 0 ? (
+                                <motion.span
+                                    key={currentCompIndex}
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -10 }}
+                                    transition={{ duration: 0.3 }}
+                                    className="text-right truncate ml-2"
+                                >
+                                    <span className="font-semibold text-gray-600 dark:text-gray-300">
+                                        {composition[currentCompIndex]}
+                                    </span>
+                                </motion.span>
+                            ) : (
+                                <span>-</span>
+                            )}
+                        </AnimatePresence>
+                    </div>
+                    <div className="h-1.5 w-full bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
+                        <motion.div
+                            key={currentCompIndex} // Add key to trigger animation on change
+                            initial={{ width: 0 }}
+                            animate={{
+                                width: composition && composition.length > 0
+                                    ? `${(() => {
+                                        const text = composition[currentCompIndex];
+                                        const match = text.match(/(\d+(\.\d+)?)%/);
+                                        return match ? Math.min(parseFloat(match[1]), 100) : 70; // Default to 70% if no % found
+                                    })()}%`
+                                    : "0%"
+                            }}
+                            transition={{ duration: 1, ease: "easeOut" }}
+                            className="h-full bg-blue-500 rounded-full"
+                        />
+                    </div>
                 </div>
 
                 {/* Dose Visualization */}
